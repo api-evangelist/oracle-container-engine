@@ -5,11 +5,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+  - Cloud
   - Containers
   - Kubernetes
-  - Cloud
-  - Orchestration
   - Oracle
+  - Orchestration
 url: >-
   https://raw.githubusercontent.com/api-evangelist/oracle-container-engine/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -22,9 +22,9 @@ apis:
       Oracle Container Engine for Kubernetes (OKE) is a managed Kubernetes service that simplifies the deployment, management, and scaling of containerized applications on Oracle Cloud Infrastructure with built-in security, high availability, and integration with OCI services.
     humanURL: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
     tags:
+      - Cloud
       - Containers
       - Kubernetes
-      - Cloud
       - Orchestration
     properties:
       - type: Documentation
