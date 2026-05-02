@@ -1,0 +1,478 @@
+openapi: 3.1.0
+info:
+  title: Oracle Container Engine for Kubernetes (OKE) API
+  description: >-
+    Oracle Container Engine for Kubernetes (OKE) is a managed Kubernetes
+    service on Oracle Cloud Infrastructure. The API exposes endpoints for
+    managing Kubernetes clusters, node pools, virtual node pools, add-ons,
+    work requests, and cluster credentials within OCI compartments.
+  version: 20180222
+  contact:
+    name: Oracle Cloud Infrastructure Support
+    url: https://support.oracle.com
+  license:
+    name: Oracle Cloud Services Agreement
+    url: https://www.oracle.com/cloud/cloud-services-agreements/
+externalDocs:
+  description: OCI Container Engine API Reference
+  url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
+servers:
+  - url: https://containerengine.{region}.oci.oraclecloud.com/20180222
+    description: OCI Container Engine regional endpoint
+    variables:
+      region:
+        default: us-ashburn-1
+        description: OCI region identifier
+security:
+  - ociAuth: []
+tags:
+  - name: Clusters
+    description: Kubernetes cluster lifecycle management
+  - name: Node Pools
+    description: Worker node pool management
+  - name: Virtual Node Pools
+    description: Serverless virtual node pool management
+  - name: Add-ons
+    description: Cluster add-on management
+  - name: Work Requests
+    description: Asynchronous operation tracking
+  - name: Credentials
+    description: Kubeconfig and cluster credentials
+paths:
+  /clusters:
+    get:
+      tags: [Clusters]
+      summary: List clusters
+      operationId: listClusters
+      parameters:
+        - $ref: '#/components/parameters/CompartmentId'
+        - name: lifecycleState
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [CREATING, ACTIVE, FAILED, DELETING, DELETED, UPDATING]
+        - name: name
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: List of clusters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClusterSummary'
+    post:
+      tags: [Clusters]
+      summary: Create a cluster
+      operationId: createCluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClusterDetails'
+      responses:
+        '202':
+          description: Cluster creation accepted
+          headers:
+            opc-work-request-id:
+              schema: { type: string }
+  /clusters/{clusterId}:
+    get:
+      tags: [Clusters]
+      summary: Get a cluster
+      operationId: getCluster
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+    put:
+      tags: [Clusters]
+      summary: Update a cluster
+      operationId: updateCluster
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateClusterDetails'
+      responses:
+        '202':
+          description: Update accepted
+    delete:
+      tags: [Clusters]
+      summary: Delete a cluster
+      operationId: deleteCluster
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '202':
+          description: Deletion accepted
+  /clusters/{clusterId}/kubeconfig/content:
+    post:
+      tags: [Credentials]
+      summary: Create kubeconfig content
+      operationId: createKubeconfig
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tokenVersion: { type: string, default: '2.0.0' }
+                expiration: { type: integer, description: 'Token expiration in seconds' }
+      responses:
+        '200':
+          description: Kubeconfig YAML
+          content:
+            application/x-yaml:
+              schema: { type: string }
+  /nodePools:
+    get:
+      tags: [Node Pools]
+      summary: List node pools
+      operationId: listNodePools
+      parameters:
+        - $ref: '#/components/parameters/CompartmentId'
+        - name: clusterId
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Node pool list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NodePoolSummary'
+    post:
+      tags: [Node Pools]
+      summary: Create a node pool
+      operationId: createNodePool
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNodePoolDetails'
+      responses:
+        '202':
+          description: Node pool creation accepted
+  /nodePools/{nodePoolId}:
+    get:
+      tags: [Node Pools]
+      summary: Get a node pool
+      operationId: getNodePool
+      parameters:
+        - name: nodePoolId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Node pool details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodePool'
+    delete:
+      tags: [Node Pools]
+      summary: Delete a node pool
+      operationId: deleteNodePool
+      parameters:
+        - name: nodePoolId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '202':
+          description: Deletion accepted
+  /virtualNodePools:
+    get:
+      tags: [Virtual Node Pools]
+      summary: List virtual node pools
+      operationId: listVirtualNodePools
+      parameters:
+        - $ref: '#/components/parameters/CompartmentId'
+        - name: clusterId
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Virtual node pool list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VirtualNodePoolSummary'
+  /clusters/{clusterId}/addons:
+    get:
+      tags: [Add-ons]
+      summary: List add-ons installed on a cluster
+      operationId: listAddons
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '200':
+          description: Cluster add-ons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Addon'
+    post:
+      tags: [Add-ons]
+      summary: Install a cluster add-on
+      operationId: installAddon
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstallAddonDetails'
+      responses:
+        '202':
+          description: Install accepted
+  /workRequests:
+    get:
+      tags: [Work Requests]
+      summary: List work requests
+      operationId: listWorkRequests
+      parameters:
+        - $ref: '#/components/parameters/CompartmentId'
+        - name: resourceId
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Work request list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkRequestSummary'
+  /workRequests/{workRequestId}:
+    get:
+      tags: [Work Requests]
+      summary: Get a work request
+      operationId: getWorkRequest
+      parameters:
+        - name: workRequestId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Work request details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkRequest'
+components:
+  securitySchemes:
+    ociAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: OCI request signing (RFC 7615) using API key pair
+  parameters:
+    CompartmentId:
+      name: compartmentId
+      in: query
+      required: true
+      schema: { type: string }
+      description: OCID of the compartment
+    ClusterId:
+      name: clusterId
+      in: path
+      required: true
+      schema: { type: string }
+      description: OCID of the cluster
+  schemas:
+    ClusterSummary:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        compartmentId: { type: string }
+        kubernetesVersion: { type: string }
+        lifecycleState: { type: string }
+        vcnId: { type: string }
+    Cluster:
+      allOf:
+        - $ref: '#/components/schemas/ClusterSummary'
+        - type: object
+          properties:
+            options:
+              $ref: '#/components/schemas/ClusterCreateOptions'
+            metadata:
+              type: object
+              properties:
+                createdByUserId: { type: string }
+                timeCreated: { type: string, format: date-time }
+                timeUpdated: { type: string, format: date-time }
+            endpoints:
+              type: object
+              properties:
+                kubernetes: { type: string }
+                publicEndpoint: { type: string }
+                privateEndpoint: { type: string }
+            availableKubernetesUpgrades:
+              type: array
+              items: { type: string }
+    ClusterCreateOptions:
+      type: object
+      properties:
+        serviceLbSubnetIds:
+          type: array
+          items: { type: string }
+        kubernetesNetworkConfig:
+          type: object
+          properties:
+            podsCidr: { type: string }
+            servicesCidr: { type: string }
+        addOns:
+          type: object
+          properties:
+            isKubernetesDashboardEnabled: { type: boolean }
+            isTillerEnabled: { type: boolean }
+        admissionControllerOptions:
+          type: object
+          additionalProperties: { type: boolean }
+    CreateClusterDetails:
+      type: object
+      required: [name, compartmentId, vcnId, kubernetesVersion]
+      properties:
+        name: { type: string }
+        compartmentId: { type: string }
+        vcnId: { type: string }
+        kubernetesVersion: { type: string }
+        options:
+          $ref: '#/components/schemas/ClusterCreateOptions'
+    UpdateClusterDetails:
+      type: object
+      properties:
+        name: { type: string }
+        kubernetesVersion: { type: string }
+    NodePoolSummary:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        clusterId: { type: string }
+        compartmentId: { type: string }
+        kubernetesVersion: { type: string }
+        nodeShape: { type: string }
+        lifecycleState: { type: string }
+    NodePool:
+      allOf:
+        - $ref: '#/components/schemas/NodePoolSummary'
+        - type: object
+          properties:
+            nodeImageId: { type: string }
+            nodeSource:
+              type: object
+              additionalProperties: true
+            quantityPerSubnet: { type: integer }
+            subnetIds:
+              type: array
+              items: { type: string }
+            nodeConfigDetails:
+              type: object
+              properties:
+                size: { type: integer }
+                placementConfigs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      availabilityDomain: { type: string }
+                      subnetId: { type: string }
+    CreateNodePoolDetails:
+      type: object
+      required: [name, clusterId, compartmentId, nodeShape, kubernetesVersion]
+      properties:
+        name: { type: string }
+        clusterId: { type: string }
+        compartmentId: { type: string }
+        kubernetesVersion: { type: string }
+        nodeShape: { type: string }
+        nodeImageId: { type: string }
+    VirtualNodePoolSummary:
+      type: object
+      properties:
+        id: { type: string }
+        displayName: { type: string }
+        clusterId: { type: string }
+        compartmentId: { type: string }
+        kubernetesVersion: { type: string }
+        size: { type: integer }
+        lifecycleState: { type: string }
+    Addon:
+      type: object
+      properties:
+        name: { type: string }
+        version: { type: string }
+        currentInstalledVersion: { type: string }
+        lifecycleState: { type: string }
+        configurations:
+          type: array
+          items:
+            type: object
+            properties:
+              key: { type: string }
+              value: { type: string }
+    InstallAddonDetails:
+      type: object
+      required: [addonName]
+      properties:
+        addonName: { type: string }
+        version: { type: string }
+        configurations:
+          type: array
+          items:
+            type: object
+            properties:
+              key: { type: string }
+              value: { type: string }
+    WorkRequestSummary:
+      type: object
+      properties:
+        id: { type: string }
+        operationType: { type: string }
+        status:
+          type: string
+          enum: [ACCEPTED, IN_PROGRESS, FAILED, SUCCEEDED, CANCELING, CANCELED]
+        compartmentId: { type: string }
+        resources:
+          type: array
+          items:
+            type: object
+            properties:
+              actionType: { type: string }
+              entityType: { type: string }
+              identifier: { type: string }
+        timeAccepted: { type: string, format: date-time }
+        timeStarted: { type: string, format: date-time }
+        timeFinished: { type: string, format: date-time }
+    WorkRequest:
+      $ref: '#/components/schemas/WorkRequestSummary'
