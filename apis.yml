@@ -35,9 +35,9 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
-      - type: API Reference
+      - type: APIReference
         url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
       - type: Pricing
         url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
@@ -48,17 +48,17 @@ common:
     url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
   - type: Documentation
     url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/oracle
   - type: Pricing
     url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
   - type: Blog
     url: https://blogs.oracle.com/cloud-infrastructure/
-  - type: Status
+  - type: StatusPage
     url: https://ocistatus.oraclecloud.com/
-  - type: Sign Up
+  - type: SignUp
     url: https://www.oracle.com/cloud/free/
 maintainers:
   - FN: Kin Lane
