@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Container Engine for Kubernetes (OKE) API — Virtual Node Pools
+  description: 'Oracle Container Engine for Kubernetes (OKE) API — Virtual Node Pools. 1 operations. Lead operation: List
+    virtual node pools. Self-contained Naftiko capability covering one Oracle Container Engine business surface.'
+  tags:
+  - Oracle Container Engine
+  - Virtual Node Pools
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_CONTAINER_ENGINE_API_KEY: ORACLE_CONTAINER_ENGINE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oracle-container-engine-virtual-node-pools
+    baseUri: https://containerengine.{region}.oci.oraclecloud.com/20180222
+    description: Oracle Container Engine for Kubernetes (OKE) API — Virtual Node Pools business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: virtualNodePools
+      path: /virtualNodePools
+      operations:
+      - name: listvirtualnodepools
+        method: GET
+        description: List virtual node pools
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: clusterId
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.ORACLE_CONTAINER_ENGINE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: oracle-container-engine-virtual-node-pools-rest
+    port: 8080
+    description: REST adapter for Oracle Container Engine for Kubernetes (OKE) API — Virtual Node Pools. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/virtualnodepools
+      name: virtualnodepools
+      description: REST surface for virtualNodePools.
+      operations:
+      - method: GET
+        name: listvirtualnodepools
+        description: List virtual node pools
+        call: oracle-container-engine-virtual-node-pools.listvirtualnodepools
+        with:
+          clusterId: rest.clusterId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oracle-container-engine-virtual-node-pools-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Container Engine for Kubernetes (OKE) API — Virtual Node Pools. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-virtual-node-pools
+      description: List virtual node pools
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-container-engine-virtual-node-pools.listvirtualnodepools
+      with:
+        clusterId: tools.clusterId
+      outputParameters:
+      - type: object
+        mapping: $.

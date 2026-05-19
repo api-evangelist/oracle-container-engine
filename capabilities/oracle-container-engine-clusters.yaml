@@ -1,0 +1,213 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Container Engine for Kubernetes (OKE) API — Clusters
+  description: 'Oracle Container Engine for Kubernetes (OKE) API — Clusters. 5 operations. Lead operation: List clusters.
+    Self-contained Naftiko capability covering one Oracle Container Engine business surface.'
+  tags:
+  - Oracle Container Engine
+  - Clusters
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_CONTAINER_ENGINE_API_KEY: ORACLE_CONTAINER_ENGINE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oracle-container-engine-clusters
+    baseUri: https://containerengine.{region}.oci.oraclecloud.com/20180222
+    description: Oracle Container Engine for Kubernetes (OKE) API — Clusters business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: clusters
+      path: /clusters
+      operations:
+      - name: listclusters
+        method: GET
+        description: List clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lifecycleState
+          in: query
+          type: array
+        - name: name
+          in: query
+          type: string
+      - name: createcluster
+        method: POST
+        description: Create a cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: clusters-clusterId
+      path: /clusters/{clusterId}
+      operations:
+      - name: getcluster
+        method: GET
+        description: Get a cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecluster
+        method: PUT
+        description: Update a cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecluster
+        method: DELETE
+        description: Delete a cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.ORACLE_CONTAINER_ENGINE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: oracle-container-engine-clusters-rest
+    port: 8080
+    description: REST adapter for Oracle Container Engine for Kubernetes (OKE) API — Clusters. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/clusters
+      name: clusters
+      description: REST surface for clusters.
+      operations:
+      - method: GET
+        name: listclusters
+        description: List clusters
+        call: oracle-container-engine-clusters.listclusters
+        with:
+          lifecycleState: rest.lifecycleState
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcluster
+        description: Create a cluster
+        call: oracle-container-engine-clusters.createcluster
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clusterid}
+      name: clusters-clusterid
+      description: REST surface for clusters-clusterId.
+      operations:
+      - method: GET
+        name: getcluster
+        description: Get a cluster
+        call: oracle-container-engine-clusters.getcluster
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecluster
+        description: Update a cluster
+        call: oracle-container-engine-clusters.updatecluster
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecluster
+        description: Delete a cluster
+        call: oracle-container-engine-clusters.deletecluster
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oracle-container-engine-clusters-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Container Engine for Kubernetes (OKE) API — Clusters. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-clusters
+      description: List clusters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-container-engine-clusters.listclusters
+      with:
+        lifecycleState: tools.lifecycleState
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-cluster
+      description: Create a cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: oracle-container-engine-clusters.createcluster
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cluster
+      description: Get a cluster
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-container-engine-clusters.getcluster
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-cluster
+      description: Update a cluster
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: oracle-container-engine-clusters.updatecluster
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-cluster
+      description: Delete a cluster
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: oracle-container-engine-clusters.deletecluster
+      outputParameters:
+      - type: object
+        mapping: $.
