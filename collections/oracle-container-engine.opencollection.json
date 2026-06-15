@@ -1,0 +1,377 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Container Engine for Kubernetes (OKE) API",
+    "version": "20180222"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/clusters",
+            "params": [
+              {
+                "name": "compartmentId",
+                "value": "",
+                "type": "query",
+                "description": "OCID of the compartment"
+              },
+              {
+                "name": "lifecycleState",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List clusters"
+        },
+        {
+          "info": {
+            "name": "Create a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/clusters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a cluster"
+        },
+        {
+          "info": {
+            "name": "Get a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/clusters/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "OCID of the cluster"
+              }
+            ]
+          },
+          "docs": "Get a cluster"
+        },
+        {
+          "info": {
+            "name": "Update a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/clusters/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "OCID of the cluster"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a cluster"
+        },
+        {
+          "info": {
+            "name": "Delete a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/clusters/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "OCID of the cluster"
+              }
+            ]
+          },
+          "docs": "Delete a cluster"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Credentials",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create kubeconfig content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/clusters/:clusterId/kubeconfig/content",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "OCID of the cluster"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create kubeconfig content"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Node Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List node pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/nodePools",
+            "params": [
+              {
+                "name": "compartmentId",
+                "value": "",
+                "type": "query",
+                "description": "OCID of the compartment"
+              },
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List node pools"
+        },
+        {
+          "info": {
+            "name": "Create a node pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/nodePools",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a node pool"
+        },
+        {
+          "info": {
+            "name": "Get a node pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/nodePools/:nodePoolId",
+            "params": [
+              {
+                "name": "nodePoolId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a node pool"
+        },
+        {
+          "info": {
+            "name": "Delete a node pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/nodePools/:nodePoolId",
+            "params": [
+              {
+                "name": "nodePoolId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a node pool"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Virtual Node Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List virtual node pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/virtualNodePools",
+            "params": [
+              {
+                "name": "compartmentId",
+                "value": "",
+                "type": "query",
+                "description": "OCID of the compartment"
+              },
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List virtual node pools"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Add-ons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List add-ons installed on a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/clusters/:clusterId/addons",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "OCID of the cluster"
+              }
+            ]
+          },
+          "docs": "List add-ons installed on a cluster"
+        },
+        {
+          "info": {
+            "name": "Install a cluster add-on",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/clusters/:clusterId/addons",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "OCID of the cluster"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Install a cluster add-on"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Work Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List work requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/workRequests",
+            "params": [
+              {
+                "name": "compartmentId",
+                "value": "",
+                "type": "query",
+                "description": "OCID of the compartment"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List work requests"
+        },
+        {
+          "info": {
+            "name": "Get a work request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/workRequests/:workRequestId",
+            "params": [
+              {
+                "name": "workRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a work request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
