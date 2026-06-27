@@ -55,7 +55,7 @@ common:
     url: https://blogs.oracle.com/cloud-infrastructure/
   - type: StatusPage
     url: https://ocistatus.oraclecloud.com/
-  - type: SignUp
+  - type: Signup
     url: https://www.oracle.com/cloud/free/
 maintainers:
   - FN: Kin Lane
