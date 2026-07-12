@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/oracle-container-engine-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ociAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: OCI request signing (RFC 7615) using API key pair
+  sources:
+  - openapi/oracle-container-engine-openapi.yml

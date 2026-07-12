@@ -41,6 +41,10 @@ apis:
       - type: OpenAPI
         url: openapi/oracle-container-engine-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/oracle-container-engine-domain-security.yml
+  - type: Authentication
+    url: authentication/oracle-container-engine-authentication.yml
   - type: Website
     url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
   - type: Documentation
