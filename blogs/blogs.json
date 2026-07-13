@@ -2,11 +2,13 @@
   "repo": "oracle-container-engine",
   "feeds": [
     {
-      "source": "https://blogs.oracle.com/cloud-infrastructure/",
+      "source": "https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/",
+      "feed_url": "https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/",
+      "title": "",
       "saved": 0,
-      "error": "HTTP 403 Forbidden"
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-27T12:57:58Z"
+  "fetched": "2026-07-11T11:50:51Z"
 }
