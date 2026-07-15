@@ -41,6 +41,8 @@ apis:
       - type: OpenAPI
         url: openapi/oracle-container-engine-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/oracle-container-engine-agentic-access.yml
   - type: DomainSecurity
     url: security/oracle-container-engine-domain-security.yml
   - type: Authentication
