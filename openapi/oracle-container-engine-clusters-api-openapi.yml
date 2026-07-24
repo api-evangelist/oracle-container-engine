@@ -1,0 +1,239 @@
+openapi: 3.1.0
+info:
+  title: Oracle Container Engine for Kubernetes (OKE) Add-ons Clusters API
+  description: Oracle Container Engine for Kubernetes (OKE) is a managed Kubernetes service on Oracle Cloud Infrastructure. The API exposes endpoints for managing Kubernetes clusters, node pools, virtual node pools, add-ons, work requests, and cluster credentials within OCI compartments.
+  version: 20180222
+  contact:
+    name: Oracle Cloud Infrastructure Support
+    url: https://support.oracle.com
+  license:
+    name: Oracle Cloud Services Agreement
+    url: https://www.oracle.com/cloud/cloud-services-agreements/
+servers:
+- url: https://containerengine.{region}.oci.oraclecloud.com/20180222
+  description: OCI Container Engine regional endpoint
+  variables:
+    region:
+      default: us-ashburn-1
+      description: OCI region identifier
+security:
+- ociAuth: []
+tags:
+- name: Clusters
+  description: Kubernetes cluster lifecycle management
+paths:
+  /clusters:
+    get:
+      tags:
+      - Clusters
+      summary: List clusters
+      operationId: listClusters
+      parameters:
+      - $ref: '#/components/parameters/CompartmentId'
+      - name: lifecycleState
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - CREATING
+            - ACTIVE
+            - FAILED
+            - DELETING
+            - DELETED
+            - UPDATING
+      - name: name
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of clusters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClusterSummary'
+    post:
+      tags:
+      - Clusters
+      summary: Create a cluster
+      operationId: createCluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClusterDetails'
+      responses:
+        '202':
+          description: Cluster creation accepted
+          headers:
+            opc-work-request-id:
+              schema:
+                type: string
+  /clusters/{clusterId}:
+    get:
+      tags:
+      - Clusters
+      summary: Get a cluster
+      operationId: getCluster
+      parameters:
+      - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+    put:
+      tags:
+      - Clusters
+      summary: Update a cluster
+      operationId: updateCluster
+      parameters:
+      - $ref: '#/components/parameters/ClusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateClusterDetails'
+      responses:
+        '202':
+          description: Update accepted
+    delete:
+      tags:
+      - Clusters
+      summary: Delete a cluster
+      operationId: deleteCluster
+      parameters:
+      - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '202':
+          description: Deletion accepted
+components:
+  schemas:
+    ClusterSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        compartmentId:
+          type: string
+        kubernetesVersion:
+          type: string
+        lifecycleState:
+          type: string
+        vcnId:
+          type: string
+    UpdateClusterDetails:
+      type: object
+      properties:
+        name:
+          type: string
+        kubernetesVersion:
+          type: string
+    ClusterCreateOptions:
+      type: object
+      properties:
+        serviceLbSubnetIds:
+          type: array
+          items:
+            type: string
+        kubernetesNetworkConfig:
+          type: object
+          properties:
+            podsCidr:
+              type: string
+            servicesCidr:
+              type: string
+        addOns:
+          type: object
+          properties:
+            isKubernetesDashboardEnabled:
+              type: boolean
+            isTillerEnabled:
+              type: boolean
+        admissionControllerOptions:
+          type: object
+          additionalProperties:
+            type: boolean
+    Cluster:
+      allOf:
+      - $ref: '#/components/schemas/ClusterSummary'
+      - type: object
+        properties:
+          options:
+            $ref: '#/components/schemas/ClusterCreateOptions'
+          metadata:
+            type: object
+            properties:
+              createdByUserId:
+                type: string
+              timeCreated:
+                type: string
+                format: date-time
+              timeUpdated:
+                type: string
+                format: date-time
+          endpoints:
+            type: object
+            properties:
+              kubernetes:
+                type: string
+              publicEndpoint:
+                type: string
+              privateEndpoint:
+                type: string
+          availableKubernetesUpgrades:
+            type: array
+            items:
+              type: string
+    CreateClusterDetails:
+      type: object
+      required:
+      - name
+      - compartmentId
+      - vcnId
+      - kubernetesVersion
+      properties:
+        name:
+          type: string
+        compartmentId:
+          type: string
+        vcnId:
+          type: string
+        kubernetesVersion:
+          type: string
+        options:
+          $ref: '#/components/schemas/ClusterCreateOptions'
+  parameters:
+    CompartmentId:
+      name: compartmentId
+      in: query
+      required: true
+      schema:
+        type: string
+      description: OCID of the compartment
+    ClusterId:
+      name: clusterId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: OCID of the cluster
+  securitySchemes:
+    ociAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: OCI request signing (RFC 7615) using API key pair
+externalDocs:
+  description: OCI Container Engine API Reference
+  url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/

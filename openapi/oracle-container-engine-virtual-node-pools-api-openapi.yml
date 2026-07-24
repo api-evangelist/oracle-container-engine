@@ -1,0 +1,81 @@
+openapi: 3.1.0
+info:
+  title: Oracle Container Engine for Kubernetes (OKE) Add-ons Virtual Node Pools API
+  description: Oracle Container Engine for Kubernetes (OKE) is a managed Kubernetes service on Oracle Cloud Infrastructure. The API exposes endpoints for managing Kubernetes clusters, node pools, virtual node pools, add-ons, work requests, and cluster credentials within OCI compartments.
+  version: 20180222
+  contact:
+    name: Oracle Cloud Infrastructure Support
+    url: https://support.oracle.com
+  license:
+    name: Oracle Cloud Services Agreement
+    url: https://www.oracle.com/cloud/cloud-services-agreements/
+servers:
+- url: https://containerengine.{region}.oci.oraclecloud.com/20180222
+  description: OCI Container Engine regional endpoint
+  variables:
+    region:
+      default: us-ashburn-1
+      description: OCI region identifier
+security:
+- ociAuth: []
+tags:
+- name: Virtual Node Pools
+  description: Serverless virtual node pool management
+paths:
+  /virtualNodePools:
+    get:
+      tags:
+      - Virtual Node Pools
+      summary: List virtual node pools
+      operationId: listVirtualNodePools
+      parameters:
+      - $ref: '#/components/parameters/CompartmentId'
+      - name: clusterId
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Virtual node pool list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VirtualNodePoolSummary'
+components:
+  schemas:
+    VirtualNodePoolSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        displayName:
+          type: string
+        clusterId:
+          type: string
+        compartmentId:
+          type: string
+        kubernetesVersion:
+          type: string
+        size:
+          type: integer
+        lifecycleState:
+          type: string
+  parameters:
+    CompartmentId:
+      name: compartmentId
+      in: query
+      required: true
+      schema:
+        type: string
+      description: OCID of the compartment
+  securitySchemes:
+    ociAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: OCI request signing (RFC 7615) using API key pair
+externalDocs:
+  description: OCI Container Engine API Reference
+  url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
