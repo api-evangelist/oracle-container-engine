@@ -5,7 +5,20 @@ description: >-
   management, and scaling of containerized applications on Oracle Cloud Infrastructure with built-in security, high
   availability, and integration with OCI services.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/oracle-container-engine.png
 tags:
   - Cloud
   - Containers
@@ -17,29 +30,114 @@ created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: oracle-container-engine:oracle-container-engine
-    name: Oracle Container Engine for Kubernetes
-    description: >-
-      Oracle Container Engine for Kubernetes (OKE) REST API for managing Kubernetes clusters, node pools, virtual node
-      pools, add-ons, and work requests on Oracle Cloud Infrastructure.
-    humanURL: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
-    baseURL: https://containerengine.us-ashburn-1.oci.oraclecloud.com/20180222
-    tags:
-      - Cloud
-      - Containers
-      - Kubernetes
-      - Orchestration
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
-      - type: GettingStarted
-        url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
-      - type: APIReference
-        url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
-      - type: Pricing
-        url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
-      - type: OpenAPI
-        url: openapi/oracle-container-engine-openapi.yml
+- aid: oracle-container-engine:oracle-container-engine-add-ons-api
+  name: Oracle Container Engine for Kubernetes Add-ons API
+  description: Cluster add-on management
+  humanURL: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
+  baseURL: https://containerengine.us-ashburn-1.oci.oraclecloud.com/20180222
+  tags:
+  - Add-ons
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-container-engine-add-ons-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
+  - type: GettingStarted
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
+- aid: oracle-container-engine:oracle-container-engine-clusters-api
+  name: Oracle Container Engine for Kubernetes Clusters API
+  description: Kubernetes cluster lifecycle management
+  humanURL: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
+  baseURL: https://containerengine.us-ashburn-1.oci.oraclecloud.com/20180222
+  tags:
+  - Clusters
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-container-engine-clusters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
+  - type: GettingStarted
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
+- aid: oracle-container-engine:oracle-container-engine-credentials-api
+  name: Oracle Container Engine for Kubernetes Credentials API
+  description: Kubeconfig and cluster credentials
+  humanURL: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
+  baseURL: https://containerengine.us-ashburn-1.oci.oraclecloud.com/20180222
+  tags:
+  - Credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-container-engine-credentials-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
+  - type: GettingStarted
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
+- aid: oracle-container-engine:oracle-container-engine-node-pools-api
+  name: Oracle Container Engine for Kubernetes Node Pools API
+  description: Worker node pool management
+  humanURL: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
+  baseURL: https://containerengine.us-ashburn-1.oci.oraclecloud.com/20180222
+  tags:
+  - Node Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-container-engine-node-pools-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
+  - type: GettingStarted
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
+- aid: oracle-container-engine:oracle-container-engine-virtual-node-pools-api
+  name: Oracle Container Engine for Kubernetes Virtual Node Pools API
+  description: Serverless virtual node pool management
+  humanURL: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
+  baseURL: https://containerengine.us-ashburn-1.oci.oraclecloud.com/20180222
+  tags:
+  - Virtual Node Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-container-engine-virtual-node-pools-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
+  - type: GettingStarted
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
+- aid: oracle-container-engine:oracle-container-engine-work-requests-api
+  name: Oracle Container Engine for Kubernetes Work Requests API
+  description: Asynchronous operation tracking
+  humanURL: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/
+  baseURL: https://containerengine.us-ashburn-1.oci.oraclecloud.com/20180222
+  tags:
+  - Work Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-container-engine-work-requests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm
+  - type: GettingStarted
+    url: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/containerengine/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
 common:
   - type: AgenticAccess
     url: agentic-access/oracle-container-engine-agentic-access.yml
