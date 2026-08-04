@@ -1,0 +1,24 @@
+{
+  "provider": "oracle-container-engine",
+  "sources": [
+    "oracle-container-engine-add-ons-api-openapi.yml",
+    "oracle-container-engine-clusters-api-openapi.yml",
+    "oracle-container-engine-credentials-api-openapi.yml",
+    "oracle-container-engine-node-pools-api-openapi.yml",
+    "oracle-container-engine-virtual-node-pools-api-openapi.yml",
+    "oracle-container-engine-work-requests-api-openapi.yml"
+  ],
+  "outputs": [
+    "oracle-container-engine-add-ons-api-openapi.yml",
+    "oracle-container-engine-clusters-api-openapi.yml",
+    "oracle-container-engine-credentials-api-openapi.yml",
+    "oracle-container-engine-node-pools-api-openapi.yml",
+    "oracle-container-engine-virtual-node-pools-api-openapi.yml",
+    "oracle-container-engine-work-requests-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
