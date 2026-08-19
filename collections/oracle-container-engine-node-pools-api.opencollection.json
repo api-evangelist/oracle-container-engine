@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Container Engine for Kubernetes (OKE) Add-ons Node Pools API",
+    "version": "20180222"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Node Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List node pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/nodePools",
+            "params": [
+              {
+                "name": "compartmentId",
+                "value": "",
+                "type": "query",
+                "description": "OCID of the compartment"
+              },
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List node pools"
+        },
+        {
+          "info": {
+            "name": "Create a node pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/nodePools",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a node pool"
+        },
+        {
+          "info": {
+            "name": "Get a node pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/nodePools/:nodePoolId",
+            "params": [
+              {
+                "name": "nodePoolId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a node pool"
+        },
+        {
+          "info": {
+            "name": "Delete a node pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/nodePools/:nodePoolId",
+            "params": [
+              {
+                "name": "nodePoolId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a node pool"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

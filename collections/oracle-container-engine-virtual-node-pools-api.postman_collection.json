@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "b6ac38b4-e9c7-4f84-b7a5-de9bb8176366",
+      "name": "Virtual Node Pools",
+      "description": {
+        "content": "Serverless virtual node pool management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2965396-fc0b-4d02-808c-18895bc5cb6e",
+          "name": "List virtual node pools",
+          "request": {
+            "name": "List virtual node pools",
+            "description": {},
+            "url": {
+              "path": [
+                "virtualNodePools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "compartmentId",
+                  "value": "<string>",
+                  "description": "(Required) OCID of the compartment"
+                },
+                {
+                  "disabled": false,
+                  "key": "clusterId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "OCI region identifier",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3398a2b7-acd3-442b-b0c0-89da7ab9a707",
+              "name": "Virtual node pool list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualNodePools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "compartmentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "clusterId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "OCI region identifier",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"displayName\": \"string\",\n    \"clusterId\": \"string\",\n    \"compartmentId\": \"string\",\n    \"kubernetesVersion\": \"string\",\n    \"size\": 5198,\n    \"lifecycleState\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"displayName\": \"string\",\n    \"clusterId\": \"string\",\n    \"compartmentId\": \"string\",\n    \"kubernetesVersion\": \"string\",\n    \"size\": 9534,\n    \"lifecycleState\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "OCI region identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-ashburn-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://containerengine.{{region}}.oci.oraclecloud.com/20180222",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7b58a941-0299-4f15-a3c7-7c10f5072e74",
+    "name": "Oracle Container Engine for Kubernetes (OKE) Add-ons Virtual Node Pools API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Oracle Container Engine for Kubernetes (OKE) is a managed Kubernetes service on Oracle Cloud Infrastructure. The API exposes endpoints for managing Kubernetes clusters, node pools, virtual node pools, add-ons, work requests, and cluster credentials within OCI compartments.\n\nContact Support:\n Name: Oracle Cloud Infrastructure Support",
+      "type": "text/plain"
+    }
+  }
+}

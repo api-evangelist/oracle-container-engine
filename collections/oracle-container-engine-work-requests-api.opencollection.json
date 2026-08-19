@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Container Engine for Kubernetes (OKE) Add-ons Work Requests API",
+    "version": "20180222"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Work Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List work requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/workRequests",
+            "params": [
+              {
+                "name": "compartmentId",
+                "value": "",
+                "type": "query",
+                "description": "OCID of the compartment"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List work requests"
+        },
+        {
+          "info": {
+            "name": "Get a work request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/workRequests/:workRequestId",
+            "params": [
+              {
+                "name": "workRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a work request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

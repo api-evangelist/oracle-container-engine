@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Container Engine for Kubernetes (OKE) Add-ons Virtual Node Pools API",
+    "version": "20180222"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Virtual Node Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List virtual node pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://containerengine.{region}.oci.oraclecloud.com/20180222/virtualNodePools",
+            "params": [
+              {
+                "name": "compartmentId",
+                "value": "",
+                "type": "query",
+                "description": "OCID of the compartment"
+              },
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List virtual node pools"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,273 @@
+{
+  "item": [
+    {
+      "id": "fb811879-1129-41d9-9a52-cdbf0eb89274",
+      "name": "Work Requests",
+      "description": {
+        "content": "Asynchronous operation tracking",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c67fea64-138f-4299-8db2-e37704a1f5a9",
+          "name": "List work requests",
+          "request": {
+            "name": "List work requests",
+            "description": {},
+            "url": {
+              "path": [
+                "workRequests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "compartmentId",
+                  "value": "<string>",
+                  "description": "(Required) OCID of the compartment"
+                },
+                {
+                  "disabled": false,
+                  "key": "resourceId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "OCI region identifier",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "367838ed-e32d-4b46-95d7-3929c8dab7b8",
+              "name": "Work request list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workRequests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "compartmentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "OCI region identifier",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"operationType\": \"string\",\n    \"status\": \"CANCELING\",\n    \"compartmentId\": \"string\",\n    \"resources\": [\n      {\n        \"actionType\": \"string\",\n        \"entityType\": \"string\",\n        \"identifier\": \"string\"\n      },\n      {\n        \"actionType\": \"string\",\n        \"entityType\": \"string\",\n        \"identifier\": \"string\"\n      }\n    ],\n    \"timeAccepted\": \"1994-03-11T03:09:00.370Z\",\n    \"timeStarted\": \"2000-12-21T11:45:42.183Z\",\n    \"timeFinished\": \"1997-10-27T20:11:39.133Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"operationType\": \"string\",\n    \"status\": \"FAILED\",\n    \"compartmentId\": \"string\",\n    \"resources\": [\n      {\n        \"actionType\": \"string\",\n        \"entityType\": \"string\",\n        \"identifier\": \"string\"\n      },\n      {\n        \"actionType\": \"string\",\n        \"entityType\": \"string\",\n        \"identifier\": \"string\"\n      }\n    ],\n    \"timeAccepted\": \"1971-05-19T22:40:05.371Z\",\n    \"timeStarted\": \"2018-12-04T23:58:37.630Z\",\n    \"timeFinished\": \"1969-08-07T01:40:29.488Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b89de688-af58-44b4-9f12-b1a5e79fd7b4",
+          "name": "Get a work request",
+          "request": {
+            "name": "Get a work request",
+            "description": {},
+            "url": {
+              "path": [
+                "workRequests",
+                ":workRequestId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workRequestId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "OCI region identifier",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2496e2e9-e7aa-4d56-bdeb-9cff15e54af8",
+              "name": "Work request details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workRequests",
+                    ":workRequestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workRequestId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "OCI region identifier",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"operationType\": \"string\",\n  \"status\": \"SUCCEEDED\",\n  \"compartmentId\": \"string\",\n  \"resources\": [\n    {\n      \"actionType\": \"string\",\n      \"entityType\": \"string\",\n      \"identifier\": \"string\"\n    },\n    {\n      \"actionType\": \"string\",\n      \"entityType\": \"string\",\n      \"identifier\": \"string\"\n    }\n  ],\n  \"timeAccepted\": \"1973-07-30T13:08:40.646Z\",\n  \"timeStarted\": \"1995-06-18T14:46:10.763Z\",\n  \"timeFinished\": \"2004-05-02T11:36:48.087Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "OCI region identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-ashburn-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://containerengine.{{region}}.oci.oraclecloud.com/20180222",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9a9f2781-7217-431f-88df-2ea858325f1b",
+    "name": "Oracle Container Engine for Kubernetes (OKE) Add-ons Work Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Oracle Container Engine for Kubernetes (OKE) is a managed Kubernetes service on Oracle Cloud Infrastructure. The API exposes endpoints for managing Kubernetes clusters, node pools, virtual node pools, add-ons, work requests, and cluster credentials within OCI compartments.\n\nContact Support:\n Name: Oracle Cloud Infrastructure Support",
+      "type": "text/plain"
+    }
+  }
+}
