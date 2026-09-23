@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Oracle Container Engine for Kubernetes (OKE) Add-ons Node Pools API
+  title: Oracle Container Engine for Kubernetes (OKE) Node Pools API
   description: Oracle Container Engine for Kubernetes (OKE) is a managed Kubernetes service on Oracle Cloud Infrastructure. The API exposes endpoints for managing Kubernetes clusters, node pools, virtual node pools, add-ons, work requests, and cluster credentials within OCI compartments.
   version: 20180222
   contact:
@@ -122,23 +122,6 @@ components:
                       type: string
                     subnetId:
                       type: string
-    NodePoolSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        clusterId:
-          type: string
-        compartmentId:
-          type: string
-        kubernetesVersion:
-          type: string
-        nodeShape:
-          type: string
-        lifecycleState:
-          type: string
     CreateNodePoolDetails:
       type: object
       required:
@@ -159,6 +142,23 @@ components:
         nodeShape:
           type: string
         nodeImageId:
+          type: string
+    NodePoolSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        clusterId:
+          type: string
+        compartmentId:
+          type: string
+        kubernetesVersion:
+          type: string
+        nodeShape:
+          type: string
+        lifecycleState:
           type: string
   parameters:
     CompartmentId:
