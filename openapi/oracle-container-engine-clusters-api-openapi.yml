@@ -148,46 +148,6 @@ components:
             type: array
             items:
               type: string
-    ClusterSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        compartmentId:
-          type: string
-        kubernetesVersion:
-          type: string
-        lifecycleState:
-          type: string
-        vcnId:
-          type: string
-    UpdateClusterDetails:
-      type: object
-      properties:
-        name:
-          type: string
-        kubernetesVersion:
-          type: string
-    CreateClusterDetails:
-      type: object
-      required:
-      - name
-      - compartmentId
-      - vcnId
-      - kubernetesVersion
-      properties:
-        name:
-          type: string
-        compartmentId:
-          type: string
-        vcnId:
-          type: string
-        kubernetesVersion:
-          type: string
-        options:
-          $ref: '#/components/schemas/ClusterCreateOptions'
     ClusterCreateOptions:
       type: object
       properties:
@@ -213,14 +173,47 @@ components:
           type: object
           additionalProperties:
             type: boolean
+    UpdateClusterDetails:
+      type: object
+      properties:
+        name:
+          type: string
+        kubernetesVersion:
+          type: string
+    CreateClusterDetails:
+      type: object
+      required:
+      - name
+      - compartmentId
+      - vcnId
+      - kubernetesVersion
+      properties:
+        name:
+          type: string
+        compartmentId:
+          type: string
+        vcnId:
+          type: string
+        kubernetesVersion:
+          type: string
+        options:
+          $ref: '#/components/schemas/ClusterCreateOptions'
+    ClusterSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        compartmentId:
+          type: string
+        kubernetesVersion:
+          type: string
+        lifecycleState:
+          type: string
+        vcnId:
+          type: string
   parameters:
-    ClusterId:
-      name: clusterId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: OCID of the cluster
     CompartmentId:
       name: compartmentId
       in: query
@@ -228,6 +221,13 @@ components:
       schema:
         type: string
       description: OCID of the compartment
+    ClusterId:
+      name: clusterId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: OCID of the cluster
   securitySchemes:
     ociAuth:
       type: apiKey
