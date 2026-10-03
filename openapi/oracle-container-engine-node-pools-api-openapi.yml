@@ -92,15 +92,11 @@ paths:
           description: Deletion accepted
 components:
   schemas:
-    CreateNodePoolDetails:
+    NodePoolSummary:
       type: object
-      required:
-      - name
-      - clusterId
-      - compartmentId
-      - nodeShape
-      - kubernetesVersion
       properties:
+        id:
+          type: string
         name:
           type: string
         clusterId:
@@ -111,7 +107,7 @@ components:
           type: string
         nodeShape:
           type: string
-        nodeImageId:
+        lifecycleState:
           type: string
     NodePool:
       allOf:
@@ -143,11 +139,15 @@ components:
                       type: string
                     subnetId:
                       type: string
-    NodePoolSummary:
+    CreateNodePoolDetails:
       type: object
+      required:
+      - name
+      - clusterId
+      - compartmentId
+      - nodeShape
+      - kubernetesVersion
       properties:
-        id:
-          type: string
         name:
           type: string
         clusterId:
@@ -158,7 +158,7 @@ components:
           type: string
         nodeShape:
           type: string
-        lifecycleState:
+        nodeImageId:
           type: string
   parameters:
     CompartmentId:

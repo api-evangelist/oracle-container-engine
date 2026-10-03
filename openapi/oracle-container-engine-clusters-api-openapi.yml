@@ -117,6 +117,71 @@ paths:
           description: Deletion accepted
 components:
   schemas:
+    UpdateClusterDetails:
+      type: object
+      properties:
+        name:
+          type: string
+        kubernetesVersion:
+          type: string
+    ClusterCreateOptions:
+      type: object
+      properties:
+        serviceLbSubnetIds:
+          type: array
+          items:
+            type: string
+        kubernetesNetworkConfig:
+          type: object
+          properties:
+            podsCidr:
+              type: string
+            servicesCidr:
+              type: string
+        addOns:
+          type: object
+          properties:
+            isKubernetesDashboardEnabled:
+              type: boolean
+            isTillerEnabled:
+              type: boolean
+        admissionControllerOptions:
+          type: object
+          additionalProperties:
+            type: boolean
+    ClusterSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        compartmentId:
+          type: string
+        kubernetesVersion:
+          type: string
+        lifecycleState:
+          type: string
+        vcnId:
+          type: string
+    CreateClusterDetails:
+      type: object
+      required:
+      - name
+      - compartmentId
+      - vcnId
+      - kubernetesVersion
+      properties:
+        name:
+          type: string
+        compartmentId:
+          type: string
+        vcnId:
+          type: string
+        kubernetesVersion:
+          type: string
+        options:
+          $ref: '#/components/schemas/ClusterCreateOptions'
     Cluster:
       allOf:
       - $ref: '#/components/schemas/ClusterSummary'
@@ -148,71 +213,6 @@ components:
             type: array
             items:
               type: string
-    ClusterCreateOptions:
-      type: object
-      properties:
-        serviceLbSubnetIds:
-          type: array
-          items:
-            type: string
-        kubernetesNetworkConfig:
-          type: object
-          properties:
-            podsCidr:
-              type: string
-            servicesCidr:
-              type: string
-        addOns:
-          type: object
-          properties:
-            isKubernetesDashboardEnabled:
-              type: boolean
-            isTillerEnabled:
-              type: boolean
-        admissionControllerOptions:
-          type: object
-          additionalProperties:
-            type: boolean
-    UpdateClusterDetails:
-      type: object
-      properties:
-        name:
-          type: string
-        kubernetesVersion:
-          type: string
-    CreateClusterDetails:
-      type: object
-      required:
-      - name
-      - compartmentId
-      - vcnId
-      - kubernetesVersion
-      properties:
-        name:
-          type: string
-        compartmentId:
-          type: string
-        vcnId:
-          type: string
-        kubernetesVersion:
-          type: string
-        options:
-          $ref: '#/components/schemas/ClusterCreateOptions'
-    ClusterSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        compartmentId:
-          type: string
-        kubernetesVersion:
-          type: string
-        lifecycleState:
-          type: string
-        vcnId:
-          type: string
   parameters:
     CompartmentId:
       name: compartmentId

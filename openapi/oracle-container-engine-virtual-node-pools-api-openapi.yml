@@ -44,6 +44,14 @@ paths:
                 items:
                   $ref: '#/components/schemas/VirtualNodePoolSummary'
 components:
+  parameters:
+    CompartmentId:
+      name: compartmentId
+      in: query
+      required: true
+      schema:
+        type: string
+      description: OCID of the compartment
   schemas:
     VirtualNodePoolSummary:
       type: object
@@ -62,14 +70,6 @@ components:
           type: integer
         lifecycleState:
           type: string
-  parameters:
-    CompartmentId:
-      name: compartmentId
-      in: query
-      required: true
-      schema:
-        type: string
-      description: OCID of the compartment
   securitySchemes:
     ociAuth:
       type: apiKey
