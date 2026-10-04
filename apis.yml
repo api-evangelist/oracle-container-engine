@@ -36,7 +36,7 @@ tags:
 - Containers
 - Kubernetes
 - Oracle
-- Orchestration
+- Container Orchestration
 url: https://raw.githubusercontent.com/api-evangelist/oracle-container-engine/refs/heads/main/apis.yml
 created: '2026-03-26'
 modified: '2026-08-21'
@@ -155,6 +155,9 @@ apis:
   - type: Pricing
     url: https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/pricing/
 common:
+- type: CapabilityMap
+  url: capabilities/oracle-container-engine-capability-edges.yml
+  name: Oracle Container Engine for Kubernetes Business Capability Map
 - type: ParentCompany
   url: https://apis.io/providers/oracle/
   name: Oracle
@@ -187,3 +190,5 @@ maintainers:
   email: kin@apievangelist.com
 x-parent: oracle
 x-relationship: product
+x-tags-removed:
+- Orchestration
