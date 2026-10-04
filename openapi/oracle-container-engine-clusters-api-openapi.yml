@@ -117,6 +117,24 @@ paths:
           description: Deletion accepted
 components:
   schemas:
+    CreateClusterDetails:
+      type: object
+      required:
+      - name
+      - compartmentId
+      - vcnId
+      - kubernetesVersion
+      properties:
+        name:
+          type: string
+        compartmentId:
+          type: string
+        vcnId:
+          type: string
+        kubernetesVersion:
+          type: string
+        options:
+          $ref: '#/components/schemas/ClusterCreateOptions'
     UpdateClusterDetails:
       type: object
       properties:
@@ -149,39 +167,6 @@ components:
           type: object
           additionalProperties:
             type: boolean
-    ClusterSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        compartmentId:
-          type: string
-        kubernetesVersion:
-          type: string
-        lifecycleState:
-          type: string
-        vcnId:
-          type: string
-    CreateClusterDetails:
-      type: object
-      required:
-      - name
-      - compartmentId
-      - vcnId
-      - kubernetesVersion
-      properties:
-        name:
-          type: string
-        compartmentId:
-          type: string
-        vcnId:
-          type: string
-        kubernetesVersion:
-          type: string
-        options:
-          $ref: '#/components/schemas/ClusterCreateOptions'
     Cluster:
       allOf:
       - $ref: '#/components/schemas/ClusterSummary'
@@ -213,14 +198,22 @@ components:
             type: array
             items:
               type: string
+    ClusterSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        compartmentId:
+          type: string
+        kubernetesVersion:
+          type: string
+        lifecycleState:
+          type: string
+        vcnId:
+          type: string
   parameters:
-    CompartmentId:
-      name: compartmentId
-      in: query
-      required: true
-      schema:
-        type: string
-      description: OCID of the compartment
     ClusterId:
       name: clusterId
       in: path
@@ -228,6 +221,13 @@ components:
       schema:
         type: string
       description: OCID of the cluster
+    CompartmentId:
+      name: compartmentId
+      in: query
+      required: true
+      schema:
+        type: string
+      description: OCID of the compartment
   securitySchemes:
     ociAuth:
       type: apiKey

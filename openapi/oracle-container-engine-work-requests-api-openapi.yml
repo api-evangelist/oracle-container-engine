@@ -64,6 +64,8 @@ paths:
                 $ref: '#/components/schemas/WorkRequest'
 components:
   schemas:
+    WorkRequest:
+      $ref: '#/components/schemas/WorkRequestSummary'
     WorkRequestSummary:
       type: object
       properties:
@@ -102,8 +104,6 @@ components:
         timeFinished:
           type: string
           format: date-time
-    WorkRequest:
-      $ref: '#/components/schemas/WorkRequestSummary'
   parameters:
     CompartmentId:
       name: compartmentId
