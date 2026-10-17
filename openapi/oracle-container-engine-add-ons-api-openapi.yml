@@ -56,25 +56,15 @@ paths:
         '202':
           description: Install accepted
 components:
+  parameters:
+    ClusterId:
+      name: clusterId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: OCID of the cluster
   schemas:
-    InstallAddonDetails:
-      type: object
-      required:
-      - addonName
-      properties:
-        addonName:
-          type: string
-        version:
-          type: string
-        configurations:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value:
-                type: string
     Addon:
       type: object
       properties:
@@ -95,14 +85,24 @@ components:
                 type: string
               value:
                 type: string
-  parameters:
-    ClusterId:
-      name: clusterId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: OCID of the cluster
+    InstallAddonDetails:
+      type: object
+      required:
+      - addonName
+      properties:
+        addonName:
+          type: string
+        version:
+          type: string
+        configurations:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
   securitySchemes:
     ociAuth:
       type: apiKey

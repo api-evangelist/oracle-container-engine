@@ -116,31 +116,36 @@ paths:
         '202':
           description: Deletion accepted
 components:
+  parameters:
+    CompartmentId:
+      name: compartmentId
+      in: query
+      required: true
+      schema:
+        type: string
+      description: OCID of the compartment
+    ClusterId:
+      name: clusterId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: OCID of the cluster
   schemas:
-    CreateClusterDetails:
+    ClusterSummary:
       type: object
-      required:
-      - name
-      - compartmentId
-      - vcnId
-      - kubernetesVersion
       properties:
+        id:
+          type: string
         name:
           type: string
         compartmentId:
           type: string
+        kubernetesVersion:
+          type: string
+        lifecycleState:
+          type: string
         vcnId:
-          type: string
-        kubernetesVersion:
-          type: string
-        options:
-          $ref: '#/components/schemas/ClusterCreateOptions'
-    UpdateClusterDetails:
-      type: object
-      properties:
-        name:
-          type: string
-        kubernetesVersion:
           type: string
     ClusterCreateOptions:
       type: object
@@ -167,6 +172,31 @@ components:
           type: object
           additionalProperties:
             type: boolean
+    CreateClusterDetails:
+      type: object
+      required:
+      - name
+      - compartmentId
+      - vcnId
+      - kubernetesVersion
+      properties:
+        name:
+          type: string
+        compartmentId:
+          type: string
+        vcnId:
+          type: string
+        kubernetesVersion:
+          type: string
+        options:
+          $ref: '#/components/schemas/ClusterCreateOptions'
+    UpdateClusterDetails:
+      type: object
+      properties:
+        name:
+          type: string
+        kubernetesVersion:
+          type: string
     Cluster:
       allOf:
       - $ref: '#/components/schemas/ClusterSummary'
@@ -198,36 +228,6 @@ components:
             type: array
             items:
               type: string
-    ClusterSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        compartmentId:
-          type: string
-        kubernetesVersion:
-          type: string
-        lifecycleState:
-          type: string
-        vcnId:
-          type: string
-  parameters:
-    ClusterId:
-      name: clusterId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: OCID of the cluster
-    CompartmentId:
-      name: compartmentId
-      in: query
-      required: true
-      schema:
-        type: string
-      description: OCID of the compartment
   securitySchemes:
     ociAuth:
       type: apiKey
